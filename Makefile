@@ -29,7 +29,7 @@ PACKAGE_DIR=/opt/site
 ELEVENTY_JS_FILE=/src/.eleventy.js
 IN_DIR = $$PWD/src
 OUT_DIR = $$PWD/out
-#DEBUG_FLAGS=DEBUG='*'
+DEBUG_FLAGS=DEBUG='*'
 CTR_NAME=eleventy
 
 build:
@@ -42,6 +42,6 @@ build:
       --entrypoint sh \
       --workdir $(PACKAGE_DIR) \
       $(IMG) \
-	    -c "ELEVENTY_ENV=production eleventy.sh $(PACKAGE_DIR) $(ELEVENTY_JS_FILE)"
+	    -c "$(DEBUG_FLAGS) ELEVENTY_ENV=production eleventy.sh $(PACKAGE_DIR) $(ELEVENTY_JS_FILE)"
 
 

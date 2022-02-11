@@ -140,4 +140,5 @@ jobs:
             build
 
           ls -alt
+          sudo ls -alt `sudo find out -type f`
 
