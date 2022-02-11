@@ -32,6 +32,7 @@ OUT_DIR = $$PWD/out
 CTR_NAME=eleventy
 
 build:
+	docker pull $(IMG)
 	docker run --pull --rm \
       -v $(IN_DIR):/src \
       -v $(OUT_DIR):/out \
