@@ -22,10 +22,7 @@ try:
 except KeyError:
   repo_owner = "phlummox"
 
-try:
-  image_name = os.environ["IMAGE_NAME"]
-except KeyError:
-  image_name = "android-studio"
+image_name = os.environ["IMAGE_NAME"]
 
 version = os.environ["IMAGE_VERSION"]
 gh_image_id = os.environ["GH_IMAGE_ID"]
@@ -58,17 +55,8 @@ def verbose_run(cmd, **kwargs):
 
 # pull existing images if there
 
-#cmd = ["docker", "pull", f"{gh_image_id}:{version}-builder"]
-#verbose_run(cmd, check=False)
 cmd = ["docker", "pull", f"{gh_image_id}:{version}"]
 verbose_run(cmd, check=False)
-
-## builder image
-#cmd = f"""docker build --pull -f Dockerfile --target builder
-#  --cache-from {gh_image_id}:{version}-builder
-#  -t {gh_image_id}:{version}-builder .""".split()
-#
-#verbose_run(cmd, check=True)
 
 # main image
 cmd = f"""docker build --pull -f Dockerfile
