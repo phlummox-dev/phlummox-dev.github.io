@@ -130,8 +130,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ${{ env.REGISTRY }}
-          #image: ghcr.io/phlummox-dev/phlummox-dev.github.io/phlummox-blog:latest
-          image: phlummox-blog:latest
+          image: phlummox-dev/phlummox-dev.github.io/phlummox-blog:latest
+          #image: phlummox-blog:latest
           run: sh -c 'echo "hello world"'
 
 #      - name: Log in to github Container registry
