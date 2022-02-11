@@ -54,7 +54,6 @@ def verbose_run(cmd, **kwargs):
   subprocess.run(cmd, **kwargs)
 
 # pull existing images if there
-
 cmd = ["docker", "pull", f"{gh_image_id}:{version}"]
 verbose_run(cmd, check=False)
 
