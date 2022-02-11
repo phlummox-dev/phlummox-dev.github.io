@@ -131,7 +131,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ${{ env.REGISTRY }}
           #image: phlummox-dev/phlummox-dev.github.io/phlummox-blog:latest
-          image: ${{ env.REGISTRY }}/phlummox-dev/phlummox-dev.github.io/phlummox-blog:latest
+          image: ${{ env.REGISTRY }}/${{ github.repository }}/phlummox-blog:latest
           #image: phlummox-blog:latest
           run: sh -c 'echo "hello world"'
 
