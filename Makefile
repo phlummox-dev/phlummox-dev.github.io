@@ -26,6 +26,7 @@ print-image-version:
 
 IMG=$(IMAGE_NAME):$(IMAGE_VERSION)
 PACKAGE_DIR=/opt/site
+ELEVENTY_JS_FILE=/src/.eleventy.js
 IN_DIR = $$PWD/src
 OUT_DIR = $$PWD/out
 #DEBUG_FLAGS=DEBUG='*'
@@ -41,8 +42,6 @@ build:
       --entrypoint sh \
       --workdir $(PACKAGE_DIR) \
       $(IMG) \
-			-c 'echo hello'
-
-#      -c "ELEVENTY_ENV=production eleventy.sh $(PACKAGE_DIR) $(ELEVENTY_JS_FILE)"
+	    -c "ELEVENTY_ENV=production eleventy.sh $(PACKAGE_DIR) $(ELEVENTY_JS_FILE)"
 
 
