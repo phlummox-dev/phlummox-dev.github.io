@@ -21,5 +21,27 @@ print-image-name:
 print-image-version:
 	@echo $(IMAGE_VERSION)
 
+###
+# eleventy stuff
+
+IMG=$(IMAGE_NAME):$(IMAGE_VERSION)
+PACKAGE_DIR=/opt/site
+IN_DIR = $$PWD/src
+OUT_DIR = $$PWD/out
+#DEBUG_FLAGS=DEBUG='*'
+CTR_NAME=eleventy
+
+build:
+	docker run --pull --rm \
+      -v $(IN_DIR):/src \
+      -v $(OUT_DIR):/out \
+      $(MOUNT_PACKAGE) \
+      --name eleventy \
+      --entrypoint sh \
+      --workdir $(PACKAGE_DIR) \
+      $(IMG) \
+			-c 'echo hello'
+
+#      -c "ELEVENTY_ENV=production eleventy.sh $(PACKAGE_DIR) $(ELEVENTY_JS_FILE)"
 
 

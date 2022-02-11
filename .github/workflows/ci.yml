@@ -125,21 +125,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: addnab/docker-run-action@v3
+      - name: Log in to github Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ${{ env.REGISTRY }}
-          #image: phlummox-dev/phlummox-dev.github.io/phlummox-blog:latest
-          image: ${{ env.REGISTRY }}/${{ github.repository }}/phlummox-blog:latest
-          #image: phlummox-blog:latest
-          run: sh -c 'echo "hello world"'
 
-#      - name: Log in to github Container registry
-#        if: github.event_name != 'pull_request'
-#        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-#        with:
-#          registry: ${{ env.REGISTRY }}
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#
+      - name: My step
+        shell: bash
+        run: |
+          set -x
+          make IMG=${{ env.REGISTRY }}/${{ github.repository }}/phlummox-blog:latest \
+            build
+
+          ls -alt
+
