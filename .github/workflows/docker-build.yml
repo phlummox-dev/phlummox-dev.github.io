@@ -1,4 +1,4 @@
-name: Publish to gh-pages
+name: build docker image
 
 on:
   repository_dispatch:
@@ -10,6 +10,7 @@ on:
       - '.dockerignore'
       - 'README.md'
       - 'LICENSE'
+      - 'pages/'
 
 env:
   REGISTRY: ghcr.io
@@ -102,20 +103,5 @@ jobs:
           docker push ${GH_IMAGE_ID}:${IMAGE_VERSION}
           docker tag ${GH_IMAGE_ID}:${IMAGE_VERSION} ${GH_IMAGE_ID}:latest
           docker push ${GH_IMAGE_ID}:latest
-
-
-    #- name: Use Node.js
-    #  uses: actions/setup-node@v1
-    #  with:
-    #    node-version: '12.x'
-
-    #- run: yarn
-    #- run: yarn run build
-
-    #- name: Deploy
-    #  uses: peaceiris/actions-gh-pages@v3
-    #  with:
-    #    github_token: ${{ secrets.GITHUB_TOKEN }}
-    #    publish_dir: ./build
 
 
