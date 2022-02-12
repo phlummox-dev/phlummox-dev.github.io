@@ -132,7 +132,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: My step
+      - name: build site
         shell: bash
         run: |
           set -x
@@ -140,5 +140,13 @@ jobs:
             build
 
           ls -alt
-          sudo ls -alt `sudo find out -type f`
+          sudo ls -alt `sudo find out -type f | sort`
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out/_site
+          force_orphan: true
+
 
