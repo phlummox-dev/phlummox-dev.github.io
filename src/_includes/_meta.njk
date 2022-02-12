@@ -1,0 +1,24 @@
+  <meta charset="utf-8" />
+  <meta name="viewport"       content="width=device-width, initial-scale=1" />
+  <meta name="language"       content="en" />
+  <meta name="DC.Language"    content="en" />
+  <meta name="DC.Format"      content="text/html" />
+
+  <meta name="og:site_name"   content="{{siteinfo.title}}"/>
+
+  <meta name="author"         content="{{siteinfo.author}}" />
+  <meta name="copyright"      content="{{siteinfo.author}}" />
+  <meta name="DC.Creator"     content="{{siteinfo.author}}" />
+
+  <meta name="keywords"       content="{{- keywords}} {{siteinfo.keywords -}}" />
+  <meta name="DC.Subject"     content="{{-keywords}} {{siteinfo.keywords -}}" />
+
+  <meta name="description"    content="{{ title }} - {{ siteinfo.title }}" />
+  <meta name="twitter:title"  content="{{ title }} - {{ siteinfo.title }}" />
+  <meta name="DC.Title"       content="{{ title }} - {{ siteinfo.title }}" />
+  <meta name="DC.Description" content="{{ title }} - {{ siteinfo.title }}" />
+
+  <meta property="og:updated_time" content="{{ date | dateIso }}" />
+
+  <meta name="google-site-verification" content="{{ siteinfo.google_site_verification_code }}" />
+

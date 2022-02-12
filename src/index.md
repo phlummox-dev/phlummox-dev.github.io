@@ -1,5 +1,6 @@
 ---
 title: "my blog"
+layout: base-layout.njk
 pagination:
   data: collections.post
   size: 10
@@ -12,6 +13,9 @@ pagination:
 <!--
 layout: layouts/default
 -->
+
+## Posts
+
 {% for post in posts %}
   <article>
     <h2>

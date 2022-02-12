@@ -1,0 +1,28 @@
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+          <div class="navbar-header">
+              <a class="navbar-brand visible-xs" href="#">#</a>
+
+              <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+          </div>
+          <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                  {% for menu_item in siteinfo.main_menu %}
+                  <li {% if page.url == menu_item.url %} aria-current="page"{% endif %}><a href="{{ menu_item.url | url }}">{{ menu_item.name }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+                <!-- navbar icons -->
+                <ul class="nav navbar-nav navbar-right">
+                  {% for menu_item in siteinfo.icon_menu %}
+                    <li class="navbar-icon"><a href="{{ menu_item.url | url }}"><i class="fa fa-{{ menu_item.name }}"></i></a></li>
+                  {% endfor %}
+                </ul>
+          </div>
+      </div>
+  </nav>
+

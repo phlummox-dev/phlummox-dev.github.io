@@ -1,0 +1,45 @@
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script src="{{ '/js/bootstrap.js' | url }}" >
+
+  <script>
+      $(document).on('click', function() { $('.collapse').collapse('hide'); })
+  </script> 
+  <script>
+    function getEmailLinkEl() {
+      queryRes = document.evaluate("//nav//a[starts-with(./@href, 'mailto')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+      return queryRes.singleNodeValue;
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var emailLnkEl = getEmailLinkEl();
+
+      if (emailLnkEl != null) {
+        emailLnkEl.onmouseover = function() {
+          if(this.decoded != true) {
+            this.href = "mailto:" + atob(this.href.replace(/^mailto:/,""));
+            this.decoded = true;
+          }
+        };
+
+        emailLnkEl.onmouseout = function() {
+          if(this.decoded != false) {
+            this.href = "mailto:" + btoa(this.href.replace(/^mailto:/,""));
+            this.decoded = false;
+          }
+        };
+      }
+    });
+  </script>
+
+  <!--
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" />
+  -->
