@@ -12,7 +12,41 @@ const moment = require('moment');
 moment.locale('en-GB');
 
 // nice shortcode for excerpts/teasers
-const excerpt = require('eleventy-plugin-excerpt');
+// see https://www.jonathanyeong.com/garden/excerpts-with-eleventy/
+const striptags = require("striptags");
+//const excerpt = require('eleventy-plugin-excerpt');
+const stringstrip = require("string-strip-html");
+
+function extractExcerpt(article) {
+  if (!article.hasOwnProperty("templateContent")) {
+    console.warn(
+      'Failed to extract excerpt: Document has no property "templateContent".'
+    );
+    return null;
+  }
+
+  let excerpt = null;
+  //console.log("\n\narticle is:", article);
+  const content = article._templateContent;
+
+  // `script`, `style` and `xml` tags
+  // are stripped _with_ their content
+  excerpt = stringstrip.stripHtml(content).result
+  //excerpt = striptags(content)
+    .substring(0, 500) // Cap at 500 characters
+    .replace(/^\s+|\s+$|\s+(?=\s)/g, "")
+    .trim()
+    .concat("...");
+  return excerpt;
+}
+
+function stripTitle(title) {
+  result = stringstrip.stripHtml(title).result
+    .replace(/^\s+|\s+$|\s+(?=\s)/g, "")
+    .trim()
+  return result;
+}
+
 
 module.exports = function(eleventyConfig) {
   // Customizations go here
@@ -35,14 +69,18 @@ module.exports = function(eleventyConfig) {
   });
 
   ////
+  // nice legal titles
+  eleventyConfig.addFilter("stripTitle", (title) => stripTitle(title));
+
+  ////
   // page excerpts (teasers)
 
-  eleventyConfig.setFrontMatterParsingOptions({
-    excerpt: true,
-    excerpt_separator: "<!-- excerpt -->"
-  });
-
-  eleventyConfig.addPlugin(excerpt);
+  //eleventyConfig.setFrontMatterParsingOptions({
+  //  excerpt: true,
+  //  excerpt_separator: "<!-- excerpt -->"
+  //});
+  //eleventyConfig.addPlugin(excerpt);
+  eleventyConfig.addShortcode("excerpt", (article) => extractExcerpt(article));
 
   ////
   // debugging
@@ -55,20 +93,44 @@ module.exports = function(eleventyConfig) {
     return arr.filter(el => el !== 'post' && el !== 'all');
   });
 
+  eleventyConfig.addFilter("inspect", function(value) {
+    console.log("typeof value is: ", typeof(value));
+    console.log("stringified value is: ", JSON.stringify(value));
+    console.log("raw value is: ", value);
+  });
 
-  //eleventyConfig.addFilter("myTypeof", function(value) {
-  //  return typeof(value);
-  //});
+  eleventyConfig.addFilter("concatNotNull", function(arr) {
+    var res = [];
+    for(i = 0; i < arr.length; i=i+1) {
+      if (arr[i] != null) {
+        res = res.concat(arr[i]);
+      }
+    }
+    return res;
+  });
 
 
   ////
   // markdown-it package and plugins
+
+  // adjust ugly default rendering of footnote refs:
+  // adapted from https://github.com/markdown-it/markdown-it-footnote/blob/3.0.3/index.js
+  function render_footnote_caption(tokens, idx/*, options, env, slf*/) {
+    var n = Number(tokens[idx].meta.id + 1).toString();
+    if (tokens[idx].meta.subId > 0) {
+      n += ':' + tokens[idx].meta.subId;
+    }
+    return '' + n + '';
+  }
+
   let markdownIt          = require("markdown-it");
   // Allow classes, identifiers and attributes in braces
   // e.g. {.class #identifier attr=value attr2="spaced value"}
   let markdownItAttrs     = require("markdown-it-attrs");
   let markdownItAnchor    = require("markdown-it-anchor");
   //let markdownItHeadings  = require("markdown-it-github-headings");
+  let markdownItFootnotes = require('markdown-it-footnote');
+  let markdownItDiv       = require('markdown-it-div');
 
   let options = {
     html: true,        // Enable HTML tags in source
@@ -78,9 +140,17 @@ module.exports = function(eleventyConfig) {
 
   let markdownLib = markdownIt(options)
                       .use(markdownItAttrs)
+                      .use(markdownItFootnotes)
+                      .use(markdownItDiv)
                       .disable('code');
+  markdownLib.renderer.rules.footnote_caption = render_footnote_caption
 
   eleventyConfig.setLibrary("md", markdownLib);
+
+  //// add our own "markdownify" filter
+  //eleventyConfig.addFilter("markdownify", function(value) {
+  //  return markdownLib(value);
+  //});
 
   ////
   // Allow YAML data files
@@ -116,24 +186,27 @@ module.exports = function(eleventyConfig) {
   // output (e.g. adding links/anchors next to headers)
   // add them below in the spot indicated.
   //
-  // another (perhaps dubious) advantage of this is the
+  // We also run `tidy` to check for errors: the
   // build will fail if the HTML produced can't be parsed.
 
   eleventyConfig.addTransform("headernav", function(content, outputPath) {
     console.log("\nheadernav. outputPath:", outputPath);
 
-    // Eleventy 1.0+: use this.inputPath and this.outputPath instead
+    // validate HTML output using `tidy`.
     if( this.outputPath && this.outputPath.endsWith(".html") ) {
       let outputPath = this.outputPath;
       console.log("executing 'tidy'");
       try {
-        execa.commandSync('tidy', {
+        execa.commandSync('tidy -q -e -utf8', {
           timeout: 1000 * 4,
           input: content
       });
       } catch (err) {
-        if (err.exitCode && err.exitCode <= 1) {
+        if (err.exitCode && err.exitCode == 0) {
           console.log("tidy: " + outputPath + " OK");
+        } else if (err.exitCode && err.exitCode == 1) {
+          console.log("tidy: " + outputPath + " produced warnings:", err.shortMessage);
+          console.log("stderr was: ", err.stderr);
         } else {
           console.log("\n\nfailed running tidy on", outputPath, err.shortMessage );
           console.log("content start was: ",  content.substring(0, 100) );
@@ -183,3 +256,4 @@ module.exports = function(eleventyConfig) {
     pathPrefix: isProduction ? '/' : '/'
   };
 }
+

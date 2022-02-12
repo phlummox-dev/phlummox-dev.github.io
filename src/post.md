@@ -18,13 +18,13 @@ layout: layouts/default
 {% for post in posts %}
 <article>
   <h3>
-    <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+    <a href="{{ post.url | url }}">{{ post.data.title | safe }}</a>
   </h3>
   <span style="font-weight: bold;" >
     <time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time>
   </span>
 
-  {% for keyword in (post.data.tags | only_normal_tags)  %}<a href={{ ("/tags/" + keyword) | url }}><kbd class="xitem-tag">{{ keyword }}</kbd></a> {% endfor %}
+  {% for keyword in (post.data.tags | only_normal_tags)  %}<a href={{ ("/tags/" + keyword) | url }}><kbd class="item-tag">{{ keyword }}</kbd></a> {% endfor %}
 
   <div style="border: solid 2pt green;"> excerpt: {% excerpt post %}</div>
 </article>
@@ -43,6 +43,5 @@ layout: layouts/default
 {%- endif %}
 </div>
 
-<!--
-vim: syntax=markdown :
--->
+{# vim: syntax=markdown :
+#}

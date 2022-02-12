@@ -5,11 +5,11 @@
 </head>
 <body>
   {% include '_nav.njk' %}
-  <header>
-  </header>
+  {# <header>
+  </header> #}
   <main>
     {{ content | safe }}
   </main>
-  <footer>Site Footer</footer>
+  {% include '_footer.njk' %}
 </body>
 </html>

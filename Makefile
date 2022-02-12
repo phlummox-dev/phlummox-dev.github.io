@@ -1,7 +1,13 @@
 
 .PHONY: docker-build docker-shell print-build-args \
         default build \
-        print-docker-hub-image
+        print-docker-hub-image kill \
+				clean
+
+# Hm. these seem ineffectual unless
+# applied to all targets (which would be bad)
+.SILENT: kill kill_
+.IGNORE: kill kill_
 
 SHELL=bash
 
@@ -37,6 +43,9 @@ ENVIRO_FLAGS=ELEVENTY_ENV=production
 #ENVIRO_FLAGS=ELEVENTY_ENV=development
 CTR_NAME=eleventy
 
+#MOUNT_PACKAGE= -v $$PWD/package.json:/opt/site/package.json \
+#
+
 docker_args = \
 	    -v $(IN_DIR):/src \
 	    -v $(OUT_DIR):/out \
@@ -49,12 +58,20 @@ docker_args = \
 docker-build:
 	docker build -f Dockerfile -t $(IMG) .
 
-kill = docker stop -t 1 $(CTR_NAME); docker rm $(CTR_NAME);
+# real kill target
+kill_:
+	-docker stop -t 1 $(CTR_NAME) 2>/dev/null
+	-docker rm $(CTR_NAME) 2>/dev/null
+
+# silent wrapper of kill_
+kill:
+	make kill_ 2>/dev/null>/dev/null
+
+pullfirst = -docker pull $(IMG)
 
 # quick-and-dirty serve, for local use
 # We use the dev environment
-serve:
-	$(kill) \
+serve: kill
 	docker run --rm -it \
 	    $(docker_args) \
 	    -p 8080:8080 \
@@ -63,13 +80,19 @@ serve:
 
 
 # build static site
-build:
-	-docker pull $(IMG)
-	$(kill) \
+build: kill
+	$(pullfirst)
 	docker run --pull --rm \
 	    $(docker_args) \
 	    $(IMG) \
 	    -c "$(DEBUG_FLAGS) $(ENVIRO_FLAGS) eleventy.sh $(PACKAGE_DIR) $(ELEVENTY_JS_FILE)"
+
+docker-shell: kill
+	$(pullfirst)
+	set -x && docker run --rm -it \
+	    $(docker_args) \
+	    -p 8080:8080 \
+	    $(IMG)
 
 clean:
 	sudo rm -rf out/_site

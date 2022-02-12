@@ -1,5 +1,5 @@
 ---
-title: "my blog"
+title: "Home page"
 layout: base-layout.njk
 pagination:
   data: collections.post
@@ -27,6 +27,5 @@ layout: layouts/default
   </article>
 {% endfor %}
 
-<!--
-vim: syntax=markdown :
--->
+{# vim: syntax=markdown :
+#}

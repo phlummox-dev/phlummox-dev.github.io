@@ -1,5 +1,5 @@
 ---
-title: "my tags"
+title: "tag listing for website"
 layout: base-layout.njk
 pagination:
   data: collections
@@ -20,6 +20,5 @@ permalink: /tags/{{ tag }}/
 {% endfor %}
 </ol>
 
-<!--
-vim: syntax=markdown :
--->
+{# vim: syntax=markdown :
+#}

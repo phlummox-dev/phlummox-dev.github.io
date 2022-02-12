@@ -2,7 +2,7 @@ title: "phlummox's blog"
 description: "phlummox personal blog"
 repository: "phlummox-dev/phlummox-dev.github.io"
 timezone: "Australia/Perth"
-keywords: ["computer science, blog, personal"]
+keywords: ["computer science", "blog", "personal"]
 author: "phlummox"
 site_url: "https://phlummox.dev/"
 copyright: "<a rel='license' href='http://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' style='border-width:0' src='https://i.creativecommons.org/l/by/4.0/80x15.png' /></a><br />licensed under a <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.<br /></a>."
@@ -16,7 +16,7 @@ main_menu:
 - url: "/post/"
   name: "Posts"
   weight: 2
-- url: "/my_tags/"
+- url: "/tags/"
   name: "Tags"
   weight: 3
 

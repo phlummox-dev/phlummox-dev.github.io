@@ -3,7 +3,7 @@
 {% include '_links.njk' %}
 {% include '_scripts.njk' %}
 
-  <title>{{ title }}</title>
+  {#- TODO: why is this here? shift into main.css #}
   <style>
     html body {
         font-family: 'Raleway', sans-serif;
@@ -15,4 +15,8 @@
         --border-width:  5px ;
     }
   </style>
-
+{% if customStyle != null %}
+  <style>
+  {{ customStyle | safe }}
+  </style>
+{% endif %}

@@ -2,7 +2,26 @@
 layout: base-layout.njk
 ---
 <article>
-  <h1>{{ title }}</h1> 
-  <time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time> 
-  {{ content | safe }}
+  <div class="item">
+  <h4>{{ title | safe }}</h4>
+  <h5><time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time></h5>
+  {% for keyword in (tags | only_normal_tags) %}<a href="{{ ('/tags/' + keyword) | url }}"><kbd class="item-tag">{{ keyword }}</kbd></a> {% endfor %}
+  <div class="text-left single-content">
+    {{ content | safe }}
+  </div>
+  </div>
+  {# related posts with the same tags
+    {|{ $related := first 3 (where (where (where .Site.Pages.ByDate.Reverse ".Type" "==" "post") ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }|}
+    {|{ if $related }|}
+        <h4 class="page-header">Related</h4>
+        {|{ range $related }|} {|{ partial "list-item" . }|} {|{ end }|}
+    {|{ end }|}
+  #}
+  {% if not disableComments %}
+    <h4 class="page-header">Comments</h4>
+    {% include '_commento.njk' %}
+  {% endif %}
 </article>
+
+{# vim: syntax=markdown :
+#}
