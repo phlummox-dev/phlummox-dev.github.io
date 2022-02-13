@@ -3,7 +3,7 @@ layout: base-layout.njk
 ---
 <article>
   <div class="item">
-  <h4>{{ title | safe }}</h4>
+  <h1>{{ title | safe }}</h1>
   <h5><time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time></h5>
   {% for keyword in (tags | only_normal_tags) %}<a href="{{ ('/tags/' + keyword + '/') | url }}"><kbd class="item-tag">{{ keyword }}</kbd></a> {% endfor %}
   <div class="text-left single-content">
