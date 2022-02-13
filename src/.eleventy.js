@@ -31,9 +31,16 @@ function extractExcerpt(article) {
 
   // `script`, `style` and `xml` tags
   // are stripped _with_ their content
-  excerpt = stringstrip.stripHtml(content).result
-  //excerpt = striptags(content)
-    .substring(0, 500) // Cap at 500 characters
+  excerpt = stringstrip.stripHtml(content, {
+      stripTogetherWithTheirContents: [
+        "script", // default
+        "style",  // default
+        "xml",    // default
+        "sup",    // <-- custom-added
+        "sub"
+      ]
+  }).result
+    .substring(0, 200) // Cap at 500 characters
     .replace(/^\s+|\s+$|\s+(?=\s)/g, "")
     .trim()
     .concat("...");
