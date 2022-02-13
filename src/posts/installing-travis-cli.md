@@ -43,7 +43,7 @@ do when installing a fresh OS).
 #.  Run `travis login`, **OR** (more likely) `travis login --pro`,
     to authenticate with the Travis CLI servers using GitHub.
     The former logs you in to [travis-ci.org](https://travis-ci.org/), 
-    the latter to [travis-ci.com](https://travis-ci.com/); the `.org`
+    the latter to [travis-ci.com](https://www.travis-ci.com/); the `.org`
     server will eventually be deprecated, IIRC.
 
 #.  Do whatever Travis-related task you needed to do. Probably, something like
