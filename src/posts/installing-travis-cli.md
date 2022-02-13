@@ -3,13 +3,12 @@ title: "Installing Travis cli"
 date: 2020-07-14
 layout: post-layout.njk
 tags: ["post", "travis", "CI"]
+customStyle: |
+    article li {
+      margin-top: 18pt;
+    }
 ---
 
-<style>
-  li {
-    margin-top: 18pt;
-  }
-</style>
 
 A reminder to myself on how to install the Travis CLI command-line tool
 on Ubuntu
