@@ -14,7 +14,7 @@ main_menu:
 - url: "/"
   name: "Home"
   weight: 1
-- url: "/post/"
+- url: "/posts/"
   name: "Posts"
   weight: 2
 - url: "/tags/"
