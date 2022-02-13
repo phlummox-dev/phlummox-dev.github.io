@@ -9,16 +9,25 @@ pagination:
   - "all"
   - "post"
 permalink: /tags/{{ tag }}/
+customStyle: |
+  article {
+    margin-top: 3.5em;
 ---
 
 <h1>Posts tagged "{{ tag }}"</h1>
 
-<ol>
-{% set taglist = collections[ tag ] %}
-{% for post in taglist  | reverse %}
-  <li><a href="{{ post.url | url }}">{{ post.data.title }}</a></li>
+{% set posts = collections[ tag ] | reverse %}
+
+{#
+{% for post in posts  %}
+
+<a href="{{ post.url | url }}">{{ post.data.title }}</a>
+
 {% endfor %}
-</ol>
+#}
+
+{% include '_posts_list.njk' %}
+
 
 {# vim: syntax=markdown :
 #}

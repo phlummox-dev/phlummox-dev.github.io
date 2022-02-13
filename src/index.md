@@ -6,26 +6,22 @@ pagination:
   size: 10
   reverse: true
   alias: posts
+customStyle: |
+  article {
+    margin-top: 3.5em;
+  }
 ---
 
 # Welcome to the blog, World { #welcome }
 
-<!--
-layout: layouts/default
--->
+A blog.
 
 ## Posts
 
-{% for post in posts %}
-  <article>
-    <h2>
-      <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-    </h2>
-    <time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time>
-    <br>
-    <div style="border: solid 2pt green;"> excerpt: {% excerpt post %}</div>
-  </article>
-{% endfor %}
+{% include '_posts_list.njk' %}
+
+{% include '_nav_arrows.njk' %}
+
 
 {# vim: syntax=markdown :
 #}

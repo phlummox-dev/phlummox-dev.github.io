@@ -1,0 +1,30 @@
+{#
+Display a list of posts.
+Requires that we have in scope a list of posts; can produce this
+with this in front-matter:
+```
+pagination:
+  data: collections.post
+  size: 2
+  reverse: true
+  alias: posts
+```
+#}
+
+{% for post in posts %}
+<article>
+  <h3>
+    <a href="{{ post.url | url }}">{{ post.data.title | safe }}</a>
+  </h3>
+  <span style="font-weight: bold;" >
+    <time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time>
+  </span>
+
+  {% for keyword in (post.data.tags | only_normal_tags)  %}<a href={{ ("/tags/" + keyword) | url }}><kbd class="item-tag">{{ keyword }}</kbd></a> {% endfor %}
+
+  <span style="word-break: break-word;">{% excerpt post %}</span>
+</article>
+{% endfor %}
+
+{# vim: syntax=markdown :
+#}
