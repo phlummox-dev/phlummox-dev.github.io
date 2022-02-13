@@ -26,18 +26,18 @@ layout: layouts/default
 
   {% for keyword in (post.data.tags | only_normal_tags)  %}<a href={{ ("/tags/" + keyword) | url }}><kbd class="item-tag">{{ keyword }}</kbd></a> {% endfor %}
 
-  <div style="border: solid 2pt green;"> excerpt: {% excerpt post %}</div>
+  <div style="border: solid 2pt green; word-break: break-word;"> excerpt: {% excerpt post %}</div>
 </article>
 {% endfor %}
 
 <div class="pages">
 {% if pagination.href.previous != null -%}
-  <a class="icon pages-icon" href="{{ pagination.href.previous | url }}" rel="next">
+  <a class="icon pages-icon" href="{{ pagination.href.previous | url }}" rel="prev" aria-label="previous page" >
       <i class="fa fa-arrow-left"></i>
   </a>
 {%- endif %}
 {% if pagination.href.next != null -%}
-  <a class="icon pages-icon" href="{{ pagination.href.next | url }}" rel="next">
+  <a class="icon pages-icon" href="{{ pagination.href.next | url }}" rel="next" aria-label="next page" >
       <i class="fa fa-arrow-right"></i>
   </a>
 {%- endif %}
