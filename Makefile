@@ -4,11 +4,6 @@
         print-docker-hub-image kill \
 				clean
 
-# Hm. these seem ineffectual unless
-# applied to all targets (which would be bad)
-.SILENT: kill kill_
-.IGNORE: kill kill_
-
 SHELL=bash
 
 default:
@@ -34,6 +29,7 @@ IMG=$(IMAGE_NAME):$(IMAGE_VERSION)
 PACKAGE_DIR=/opt/site
 ELEVENTY_JS_FILE=/src/.eleventy.js
 IN_DIR = $$PWD/src
+ASSETS_DIR = $$PWD/assets
 OUT_DIR = $$PWD/out
 # uncomment this to debug eleventy:
 #DEBUG_FLAGS=DEBUG='*'
@@ -44,13 +40,15 @@ ENVIRO_FLAGS=ELEVENTY_ENV=production
 CTR_NAME=eleventy
 
 #MOUNT_PACKAGE= -v $$PWD/package.json:/opt/site/package.json \
-#
+
+DOCKER = docker -D
 
 docker_args = \
 	    -v $(IN_DIR):/src \
+	    -v $(ASSETS_DIR):/assets \
 	    -v $(OUT_DIR):/out \
 	    $(MOUNT_PACKAGE) \
-	    --name eleventy \
+	    --name $(CTR_NAME) \
 	    --workdir $(PACKAGE_DIR) \
 	    --entrypoint sh
 
@@ -60,19 +58,19 @@ docker-build:
 
 # real kill target
 kill_:
-	-docker stop -t 1 $(CTR_NAME) 2>/dev/null
-	-docker rm $(CTR_NAME) 2>/dev/null
+	-$(DOCKER) stop -t 1 $(CTR_NAME) 2>/dev/null
+	-$(DOCKER) rm $(CTR_NAME) 2>/dev/null
 
 # silent wrapper of kill_
 kill:
 	make kill_ 2>/dev/null>/dev/null
 
-pullfirst = -docker pull $(IMG)
+pullfirst = -$(DOCKER) pull $(IMG)
 
 # quick-and-dirty serve, for local use
 # We use the dev environment
 serve: kill
-	docker run --rm -it \
+	$(DOCKER) run --rm -it \
 	    $(docker_args) \
 	    -p 8080:8080 \
 	    $(IMG) \
@@ -82,7 +80,7 @@ serve: kill
 # build static site
 build: kill
 	$(pullfirst)
-	docker run --pull --rm \
+	$(DOCKER) run --pull --rm \
 	    $(docker_args) \
 	    $(IMG) \
 	    -c "$(DEBUG_FLAGS) $(ENVIRO_FLAGS) eleventy.sh $(PACKAGE_DIR) $(ELEVENTY_JS_FILE)"

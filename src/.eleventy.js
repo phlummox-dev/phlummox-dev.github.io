@@ -165,7 +165,7 @@ module.exports = function(eleventyConfig) {
   // This will copy these folders to the output without modifying them at all
   var asset_dirs = ['css', 'fonts', 'images', 'js'];
   for (const dir of asset_dirs) {
-    const src_dir = "/src/" + dir;
+    const src_dir = "/assets/" + dir;
     if (! fs.existsSync(src_dir) ) {
       console.log("warning: assets dir " + src_dir + " does not exist");
     }

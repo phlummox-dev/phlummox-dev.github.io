@@ -1,24 +1,46 @@
+---
+permalink: /css/main.css
+---
+
 html, body {
     height: 100%;
 }
 
 body {
-    padding-top:    55px;
-    display:        flex;
-    text-align:     center;
-    flex-direction: column;
-    color:          #000;
+  padding-top:    55px;
+  display:        flex;
+  text-align:     center;
+  flex-direction: column;
+  color:          #000;
+  x-align-items:    center;
+  {#- align-items:    center; #}
 }
+
+.main-holder {
+  display: flex;  
+  x-flex-direction: column;
+  x-align-items:    center;
+}
+
 /*
     font-size:      16px;
 */
 
 main {
-    margin: auto;
-    padding: 25px;
-    flex: 1 0 auto;
-    max-width: 750px;
+  padding: 25px;
+  xx-flex: 1 0 auto;
+  max-width: 750px;
+  x-position: relative;
+  x-align-self: auto;  
 }
+
+{#
+  left: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateX(-50%);
+#}
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: inherit;
@@ -194,3 +216,6 @@ img {
 #commento-markdown-help-root {
   line-height: 2.5 !important;
 }
+
+{# vim: syntax=css :
+#}
