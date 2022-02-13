@@ -7,19 +7,15 @@ html, body {
 }
 
 body {
+  margin: 0;
+}
+
+body {
   padding-top:    55px;
   display:        flex;
   text-align:     center;
   flex-direction: column;
   color:          #000;
-  x-align-items:    center;
-  {#- align-items:    center; #}
-}
-
-.main-holder {
-  display: flex;  
-  x-flex-direction: column;
-  x-align-items:    center;
 }
 
 /*
@@ -28,19 +24,14 @@ body {
 
 main {
   padding: 25px;
-  xx-flex: 1 0 auto;
+  flex: 1 0 auto;
   max-width: 750px;
-  x-position: relative;
-  x-align-self: auto;  
-}
-
-{#
+  position: relative;
   left: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateX(-50%);
-#}
-
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: inherit;
