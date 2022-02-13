@@ -129,6 +129,8 @@ module.exports = function(eleventyConfig) {
   let markdownItAttrs     = require("markdown-it-attrs");
   let markdownItAnchor    = require("markdown-it-anchor");
   //let markdownItHeadings  = require("markdown-it-github-headings");
+  //
+  let markdownItFancyList = require("markdown-it-fancy-lists").markdownItFancyListPlugin;
   let markdownItFootnotes = require('markdown-it-footnote');
   let markdownItDiv       = require('markdown-it-div');
 
@@ -142,6 +144,7 @@ module.exports = function(eleventyConfig) {
                       .use(markdownItAttrs)
                       .use(markdownItFootnotes)
                       .use(markdownItDiv)
+                      .use(markdownItFancyList)
                       .disable('code');
   markdownLib.renderer.rules.footnote_caption = render_footnote_caption
 
