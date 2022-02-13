@@ -41,6 +41,11 @@ provides a [statically-linked binary][aliyun-install]{target="_blank"} plus the
 Really though, the best CLI is one you [don't have to
 install at all][az-cloud-shell]{target="_blank"}.
 
+[^aws-credit]: Though to give Amazon credit, they do at least *tell* you
+  where their install script will be creating files. So it would be
+  pretty easy to package the resulting files up into whatever package
+  is native to your distribution (e.g. `.deb` or `.rpm` files).
+
 I'm surprised (and annoyed, of course)
 that more cloud providers don't provide web-based shell
 access to their tools. But when they don't, the next
@@ -62,6 +67,9 @@ with potentially only [*one*][docker]{target="_blank"} [baroque][baroque]{target
 [Kudzu-][kudzu]{target="_blank"}pervasive
 framework.[^systemd]
 
+[^systemd]: Well, two, if your OS also
+  uses [systemd](https://lwn.net/Articles/676831/){target="_blank"}.
+
 <!--
 sap archived at <http://archive.is/8wq7h>
 -->
@@ -80,6 +88,36 @@ Taking Azure's `az` tool as an example, you can do it like so:
     ```bash
     docker -D run -v /root --name azconfig mcr.microsoft.com/azure-cli
     ```
+
+[^mcr]: Microsoft hosts the `az` CLI docker images on its own registry,
+  the [Microsoft Container Registry](https://github.com/microsoft/containerregistry){target="_blank"},
+  located at <https://mcr.microsoft.com>{target="_blank"}, so when pulling from it  we
+  have to use a [qualified reference](https://windsock.io/referencing-docker-images/){target="_blank"}
+  to the image we want. If we wanted to explore the tags available for
+  the `azure-cli` image, we could run \
+  &nbsp; \
+  `curl -L https://mcr.microsoft.com/v2/azure-cli/tags/list`
+  &nbsp;\
+  &nbsp;\
+  [This][exploring-mcr]{target="_blank"} blog post suggests it also should be possible to
+  explore the various repositories in the [MCR registry][ras-syndrome]{target="_blank"}
+  from within the very
+  nifty [Visual Studio Code](https://code.visualstudio.com/){target="_blank"} IDE, but I
+  couldn't get that to work, and Microsoft
+  [doesn't seem][no-ms-browsing]{target="_blank"} to want you to.
+
+[^mcr-impl]: Interestingly, if you look at the headers of the response
+  from `mcr.microsoft.com`, using `curl -v`, the `Host` name is
+  `openresty`, suggesting Microsoft's registry is powered by the
+  open source
+  [OpenResty](https://openresty.org/en/){target="_blank"} variant of
+  Nginx, which adds to Nginx the ability to make use of libraries
+  written in LuaJIT.
+  Or uses it as a reverse proxy, anyway.
+  How things [have changed][ballmer-changed]{target="_blank"} since the days of
+  ["Linux is a cancer"][linux-cancer]{target="_blank"} (or,
+  ["communism"][linux-communism]{target="_blank"}) and
+  ["Embrace, extend, extinguish"][eex]{target="_blank"}! Hopefully.
 
 We now have a stopped Docker container called `azconfig`, containing an
 anonymous volume[^anon-vols] which contains the contents of the `/root`
@@ -160,6 +198,7 @@ But I like to think that if enough of us join together, in a spirit
 of good-will and positivity, and yell at cloud providers to fix their shit
 up, then maybe someday the others will too.
 
+
 [heroku-cli]: <https://devcenter.heroku.com/articles/heroku-cli>
 [digitalocean-cli]: <https://github.com/digitalocean/doctl/blob/master/README.md#snap-supported-os>
 [snap-mint]: <https://lwn.net/Articles/825005/>
@@ -173,7 +212,9 @@ up, then maybe someday the others will too.
 [aliyun-install]: <https://www.alibabacloud.com/help/doc-detail/121541.htm>
 [aliyun-github]: <https://github.com/aliyun/aliyun-cli>
 [az-cloud-shell]: <https://www.infoq.com/articles/azure-cloud-shell/>
+
 [webssh2]: https://www.npmjs.com/package/webssh2
+
 [docker]: <https://www.docker.com/>
 [baroque]: <https://coreos.com/rkt/docs/latest/rkt-vs-other-projects.html#process-model>
 [rube]: <https://media.rubegoldberg.com/site/wp-content/uploads/2019/04/hachathon-1200x674.jpg>
@@ -181,48 +222,11 @@ up, then maybe someday the others will too.
 [esque]: <https://levelup.gitconnected.com/how-docker-authentication-works-by-documentation-mitm-and-implementation-e62cd7a31178#9bf4>
 [kudzu]: <https://www.smithsonianmag.com/science-nature/true-story-kudzu-vine-ate-south-180956325/>
 
-[^aws-credit]: Though to give Amazon credit, they do at least *tell* you
-  where their install script will be creating files. So it would be
-  pretty easy to package the resulting files up into whatever package
-  is native to your distribution (e.g. `.deb` or `.rpm` files).
-
-[^systemd]: Well, two, if your OS also
-  uses [systemd](https://lwn.net/Articles/676831/){target="_blank"}.
-
-[^mcr]: Microsoft hosts the `az` CLI docker images on its own registry,
-  the [Microsoft Container Registry](https://github.com/microsoft/containerregistry){target="_blank"},
-  located at <https://mcr.microsoft.com>{target="_blank"}, so when pulling from it  we
-  have to use a [qualified reference](https://windsock.io/referencing-docker-images/){target="_blank"}
-  to the image we want. If we wanted to explore the tags available for
-  the `azure-cli` image, we could run \
-  &nbsp; \
-  `curl -L https://mcr.microsoft.com/v2/azure-cli/tags/list`
-  &nbsp;\
-  &nbsp;\
-  [This][exploring-mcr]{target="_blank"} blog post suggests it also should be possible to
-  explore the various repositories in the [MCR registry][ras-syndrome]{target="_blank"}
-  from within the very
-  nifty [Visual Studio Code](https://code.visualstudio.com/){target="_blank"} IDE, but I
-  couldn't get that to work, and Microsoft
-  [doesn't seem][no-ms-browsing]{target="_blank"} to want you to.
-
 [exploring-mcr]: <https://jeeweetje.net/2019/07/10/exploring-containers-in-the-microsoft-container-registry-with-visual-studio-code/>
 [ras-syndrome]: <https://en.wikipedia.org/wiki/RAS_syndrome>
 [no-ms-browsing]: <https://github.com/microsoft/containerregistry#faq>
 
 
-[^mcr-impl]: Interestingly, if you look at the headers of the response
-  from `mcr.microsoft.com`, using `curl -v`, the `Host` name is
-  `openresty`, suggesting Microsoft's registry is powered by the
-  open source
-  [OpenResty](https://openresty.org/en/){target="_blank"} variant of
-  Nginx, which adds to Nginx the ability to make use of libraries
-  written in LuaJIT.
-  Or uses it as a reverse proxy, anyway.
-  How things [have changed][ballmer-changed]{target="_blank"} since the days of
-  ["Linux is a cancer"][linux-cancer]{target="_blank"} (or,
-  ["communism"][linux-communism]{target="_blank"}) and
-  ["Embrace, extend, extinguish"][eex]{target="_blank"}! Hopefully.
 
 [ballmer-changed]: <https://www.zdnet.com/article/ballmer-i-may-have-called-linux-a-cancer-but-now-i-love-it/>
 [linux-cancer]: <https://www.theregister.com/2001/06/02/ballmer_linux_is_a_cancer/>
@@ -233,7 +237,7 @@ up, then maybe someday the others will too.
   anonymous volumes are not actually anonymous (though they are
   volumes). They just are given a [randomly-generated][random-name]{target="_blank"} name
   when created -- something euphonious and pleasant to read like
-  `71bc263a17ab4233d9d966c42bdb060c026ce6531c00fa5a7b7329834fe01914` for
+  <code style="word-break: break-word">71bc263a17ab4233d9d966c42bdb060c026ce6531c00fa5a7b7329834fe01914000000000000000000</code> for
   instance.
 
 [terrible]: <https://martinfowler.com/bliki/TwoHardThings.html>
