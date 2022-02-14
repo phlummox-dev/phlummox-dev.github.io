@@ -2,7 +2,6 @@
       <div class="container">
           <div class="navbar-header">
               <a class="navbar-brand visible-xs" href="#">#</a>
-
               <button class="navbar-toggle"
                       aria-label="toggle navigation menu"
                       data-target=".navbar-collapse"
@@ -22,10 +21,11 @@
                 <!-- navbar icons -->
                 <ul class="nav navbar-nav navbar-right">
                   {% for menu_item in siteinfo.icon_menu %}
-                    <li class="navbar-icon"><a href="{{ menu_item.url | url }}" rel="external"><i class="fa fa-{{ menu_item.name }}" aria-label="{{menu_item.name}}" ></i></a></li>
+                    <li class="navbar-icon"><a href="{{ menu_item.url | url }}" rel="external"  aria-label="{{menu_item.description}}"><i class="fa fa-{{ menu_item.name }}"></i></a></li>
                   {% endfor %}
                 </ul>
           </div>
       </div>
   </nav>
-
+{# vim: syntax=html :
+#}

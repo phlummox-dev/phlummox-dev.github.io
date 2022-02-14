@@ -163,6 +163,11 @@ module.exports = function(eleventyConfig) {
   //  return markdownLib(value);
   //});
 
+  /////
+  // add RSS plugin
+  let rssPlugin = require("@11ty/eleventy-plugin-rss");
+  eleventyConfig.addPlugin(rssPlugin);
+
   ////
   // Allow YAML data files
 
@@ -244,6 +249,13 @@ module.exports = function(eleventyConfig) {
       return content;
     }
   })
+
+  /// modify global data.
+  // bit hackish - uses hardcoded port 8080
+  // TODO: check actual port
+  if (! isProduction) {
+    eleventyConfig.addGlobalData("siteinfo.site_url", "http://localhost:8080/");
+  }
 
   ////
   // eleventy options

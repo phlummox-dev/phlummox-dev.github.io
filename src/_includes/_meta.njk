@@ -1,14 +1,17 @@
   <meta charset="utf-8" />
   <meta name="viewport"       content="width=device-width, initial-scale=1" />
-  <meta name="language"       content="en" />
-  <meta name="DC.Language"    content="en" />
+  <meta name="language"       content="{{siteinfo.language}}" />
+  <meta name="DC.Language"    content="{{siteinfo.language}}" />
   <meta name="DC.Format"      content="text/html" />
+
+  <link rel="canonical"       href="{{siteinfo.site_url + page.url.substring(1) }}" />
+  <link rel="alternate"       href="{{siteinfo.site_url + 'feed.xml'}}" type="application/atom+xml" title="{{siteinfo.title}}">
 
   <meta name="og:site_name"   content="{{siteinfo.title}}"/>
 
-  <meta name="author"         content="{{siteinfo.author}}" />
-  <meta name="copyright"      content="{{siteinfo.author}}" />
-  <meta name="DC.Creator"     content="{{siteinfo.author}}" />
+  <meta name="author"         content="{{ siteinfo.author if (author == null) else author }}" />
+  <meta name="copyright"      content="{{ siteinfo.author if (author == null) else author }}" />
+  <meta name="DC.Creator"     content="{{ siteinfo.author if (author == null) else author }}" />
 
   <meta name="keywords"       content="{{ [keywords, siteinfo.keywords] | concatNotNull | join(", ") }}" />
   <meta name="DC.Subject"     content="{{ [keywords, siteinfo.keywords] | concatNotNull | join(", ") }}" />
