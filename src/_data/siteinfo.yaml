@@ -1,9 +1,12 @@
 title: "phlummox's blog"
+subtitle: "random posts and musings"
 description: "phlummox personal blog"
 repository: "phlummox-dev/phlummox-dev.github.io"
 timezone: "Australia/Perth"
+language: "en"
 keywords: ["computer science", "blog", "personal"]
 author: "phlummox"
+author_email: "webmaster@phlummox.dev"
 #site_url: "https://phlummox.dev/"
 site_url: "https://phlummox-dev.github.io/"
 copyright: "<a rel='license' href='https://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' style='border-width:0' src='https://licensebuttons.net/l/by/4.0/80x15.png' width='80' height='15' /></a><br />licensed under a <a rel='license' href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.<br /></a>."
@@ -26,21 +29,26 @@ icon_menu:
 - url: "mailto:Z2l0aHViLmlvQHBobHVtbW94LmRldg=="
   name: "envelope-o"
   weight: 1
+  description: "email address"
 
 - url: "https://github.com/phlummox/"
   name: "github"
   weight: 2
+  description: "github profile"
 
 - url: "https://twitter.com/phlummox/"
   name: "twitter"
   weight: 3
+  description: "twitter profile"
 
 - url: "https://stackoverflow.com/users/6818792/phlummox/"
   name: "stack-overflow"
   weight: 4
+  description: "stackoverflow profile"
 
 - url: "https://www.reddit.com/user/phlummox/"
   name: "reddit"
   weight: 5
+  description: "reddit profile"
 
 
