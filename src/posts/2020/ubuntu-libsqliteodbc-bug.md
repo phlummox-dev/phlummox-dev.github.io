@@ -2,7 +2,7 @@
 title: "Ubuntu libsqliteodbc bug"
 date: 2020-06-04
 layout: post-layout.njk
-tags: ["post", "sqlite", "odbc", "libreoffice"]
+tags: ["sqlite", "odbc", "libreoffice"]
 ---
 
 Putting this here so I can find it again...

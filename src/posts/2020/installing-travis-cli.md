@@ -2,7 +2,7 @@
 title: "Installing Travis cli"
 date: 2020-07-14
 layout: post-layout.njk
-tags: ["post", "travis", "CI"]
+tags: ["travis", "CI"]
 customStyle: |
     article li {
       margin-top: 18pt;

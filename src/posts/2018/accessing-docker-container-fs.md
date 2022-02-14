@@ -2,7 +2,7 @@
 title: "Accessing the filesystem of a running Docker container"
 date: 2018-07-30T12:34:02+08:00
 layout: post-layout.njk
-tags: ["post", "docker"]
+tags: ["docker"]
 ---
 
 Well that's neat --- there's a [quick-and-dirty

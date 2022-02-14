@@ -2,7 +2,7 @@
 title: "Backing Things Up"
 date: 2022-02-10
 layout: post-layout.njk
-tags: ["post", "backups", "home", "cloud"]
+tags: ["backups", "home", "cloud"]
 ---
 
 [/u/bigheadsmith][bighead] just [asked on Reddit][reddit-post]

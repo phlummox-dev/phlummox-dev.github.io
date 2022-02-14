@@ -2,7 +2,7 @@
 title: "Running Azure's <samp>az</samp> command-line tool from a docker container; or, the \"credentials in a container\" trick"
 date: 2020-08-17
 layout: post-layout.njk
-tags: ["post", "azure", "docker", "container", "cli"]
+tags: ["azure", "docker", "container", "cli"]
 customStyle: |
   .web-login {
     display: block;

@@ -2,7 +2,7 @@
 title: "Android command-line tools cheat sheet"
 date: 2022-01-12
 layout: post-layout.njk
-tags: ["post", "android", "adb", "command-line"]
+tags: ["android", "adb", "command-line"]
 ---
 
 A reminder to myself. I do work on Android apps rarely enough that
