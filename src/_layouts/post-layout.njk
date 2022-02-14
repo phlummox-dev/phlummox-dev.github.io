@@ -4,7 +4,9 @@ layout: base-layout.njk
 <article>
   <div class="item">
   <h1>{{ title | safe }}</h1>
-  <h5><time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time></h5>
+  <div style="font-weight: 500;" >
+    <time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time>
+  </div>
   {% for keyword in (tags | only_normal_tags) %}<a href="{{ ('/tags/' + keyword + '/') | url }}"><kbd class="item-tag">{{ keyword }}</kbd></a> {% endfor %}
   <div class="text-left single-content">
     {{ content | safe }}
@@ -18,7 +20,7 @@ layout: base-layout.njk
     {|{ end }|}
   #}
   {% if not disableComments %}
-    <h4 class="page-header">Comments</h4>
+    <h2 class="page-header">Comments</h2>
     {% include '_commento.njk' %}
   {% endif %}
 </article>
