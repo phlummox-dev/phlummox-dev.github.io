@@ -17,6 +17,8 @@ const striptags = require("striptags");
 //const excerpt = require('eleventy-plugin-excerpt');
 const stringstrip = require("string-strip-html");
 
+const excerpt_length = 200;
+
 function extractExcerpt(article) {
   if (!article.hasOwnProperty("templateContent")) {
     console.warn(
@@ -26,7 +28,6 @@ function extractExcerpt(article) {
   }
 
   let excerpt = null;
-  //console.log("\n\narticle is:", article);
   const content = article._templateContent;
 
   // `script`, `style` and `xml` tags
@@ -40,8 +41,8 @@ function extractExcerpt(article) {
         "sub"
       ]
   }).result
-    .substring(0, 200) // Cap at 500 characters
-    .replace(/^\s+|\s+$|\s+(?=\s)/g, "")
+    .substring(0, excerpt_length) // Cap length
+    .replaceAll(/\s+/g, " ")
     .trim()
     .concat("...");
   return excerpt;
