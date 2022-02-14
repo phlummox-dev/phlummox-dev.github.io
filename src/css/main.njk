@@ -31,7 +31,28 @@ main {
   line-height:    1.4;
 }
 
-h1, h2, h3, h4, h5, h6 {
+{#
+font weights:
+https://stackoverflow.com/questions/7256065/specifying-style-and-weight-for-google-fonts
+Thin            100     
+Extra Light     200
+Light           300
+Regular         400
+Medium          500
+Semi-Bold       600
+Bold            700
+Extra-Bold      800
+Black           900
+#}
+
+h1, h2{
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit;
+}
+
+h3, h4, h5, h6 {
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
@@ -47,7 +68,13 @@ h1 {
   font-size: 1.4em;
 }
 
+h2 {
+    font-size: 1.2em;
+}
 
+h3 {
+    font-size: 1em;
+}
 
 h4 {
   font-size: 18px;
@@ -107,7 +134,7 @@ sup {
 /* indicate current page */
 
 [aria-current]:not([aria-current="false"]) {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 /*footer*/
