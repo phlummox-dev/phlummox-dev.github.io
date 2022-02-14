@@ -1,33 +1,28 @@
 ---
-title: "tag listing for website"
 layout: base-layout.njk
 pagination:
   data: collections
   size: 1
   alias: tag
+  reverse: true
   filter:
   - "all"
   - "post"
 permalink: /tags/{{ tag }}/
+eleventyComputed:
+  title: "Posts tagged \"{{ tag }}\""
 customStyle: |
   article {
     margin-top: 3.5em;
 ---
 
-<h1>Posts tagged "{{ tag }}"</h1>
+# Posts tagged "{{ tag }}"
 
 {% set posts = collections[ tag ] | reverse %}
 
-{#
-{% for post in posts  %}
+{%- from 'postslist_macro.njk' import postlist_macro -%}
 
-<a href="{{ post.url | url }}">{{ post.data.title }}</a>
-
-{% endfor %}
-#}
-
-{% include '_posts_list.njk' %}
-
+{{ postlist_macro(posts, 'h2') }}
 
 {# vim: syntax=markdown :
 #}

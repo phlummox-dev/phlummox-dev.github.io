@@ -7,8 +7,8 @@ pagination:
   reverse: true
   alias: posts
 customStyle: |
-  article {
-    margin-top: 3.5em;
+  .post-item {
+    margin-top: 2.5em;
   }
 ---
 
@@ -18,10 +18,11 @@ A blog.
 
 ## Posts
 
-{% include '_posts_list.njk' %}
+{%- from 'postslist_macro.njk' import postlist_macro -%}
+
+{{ postlist_macro(posts, 'h3') }}
 
 {% include '_nav_arrows.njk' %}
-
 
 {# vim: syntax=markdown :
 #}

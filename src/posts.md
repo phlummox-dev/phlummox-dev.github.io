@@ -7,14 +7,16 @@ pagination:
   reverse: true
   alias: posts
 customStyle: |
-  article {
+  .post-item {
     margin-top: 3.5em;
   }
 ---
 
 # Posts
 
-{% include '_posts_list.njk' %}
+{%- from 'postslist_macro.njk' import postlist_macro -%}
+
+{{ postlist_macro(posts, 'h2') }}
 
 {% include '_nav_arrows.njk' %}
 
