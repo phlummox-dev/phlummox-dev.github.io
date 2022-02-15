@@ -16,10 +16,6 @@ body {
   color:          #000;
 }
 
-/*
-    font-size:      16px;
-*/
-
 main {
   padding: 25px;
   flex: 1 0 auto;
@@ -90,6 +86,13 @@ code, kbd, pre, samp {
   font-size: 1em;
 }
 
+/* an article or blog posts's tags.
+ * (will usually be a `kbd` or similar.
+ */
+.item-tag {
+  background-color: var(--accent);
+}
+
 /* Inline code */
 code {
   padding: 2px 4px;
@@ -122,6 +125,12 @@ kbd {
   text-align: left;
 }
 
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
 sub,
 sup {
   font-size: 85%;
@@ -129,8 +138,6 @@ sup {
   position: relative;
   vertical-align: baseline;
 }
-
-
 
 /* indicate current page */
 
@@ -144,26 +151,6 @@ sup {
     margin: 15px 0;
 }
 
-/*home page*/
-
-.intro {
-}
-
-.intro > h1 {
-    color: #212121;
-    font-size: 12vh;
-}
-
-.intro > h2 {
-    color: #757575;
-    font-size: 3vmin;
-}
-
-.intro > .profile {
-    width: 10vh;
-    height: 10vh;
-    border-radius: 50%;
-}
 
 /*apply accent colour to links*/
 
@@ -206,6 +193,23 @@ a:hover {
     display: inline-block !important;
 }
 
+@media (max-width: 767px) {
+  /* content made initially 'invisible' (height 0) on eXtra-Small width screens*/
+  .expandable-content-xs {
+     overflow: hidden;
+     height:auto;
+     z-index: 900;
+     transition: height 0.3s ease-out;
+  }
+
+  .expandable-content-xs[data-expanded="false"] {
+    height: 0;
+  }
+  .expandable-content-xs[data-expanded="true"] {
+    height: auto;
+  }
+} /*end media */
+
 /*coloured borders at top and bottom of the page*/
 
 .navbar.navbar-default {
@@ -222,6 +226,11 @@ footer {
 
 img {
     max-width: 100%;
+}
+
+/* copyright and licensing */
+.text-muted {
+  font-size: small;
 }
 
 
