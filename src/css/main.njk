@@ -193,6 +193,14 @@ a:hover {
     display: inline-block !important;
 }
 
+/* big */
+@media (min-width: 768px) {
+  .expandable-content-xs[data-expanded="false"] {
+    height: auto !important;
+  }
+}
+
+/* small */
 @media (max-width: 767px) {
   /* content made initially 'invisible' (height 0) on eXtra-Small width screens*/
   .expandable-content-xs {
@@ -211,10 +219,11 @@ a:hover {
 } /*end media */
 
 /*coloured borders at top and bottom of the page*/
-
+/*
 .navbar.navbar-default {
     border-top: var(--border-width) solid var(--accent);
 }
+*/
 
 .single-content {
     hyphens: auto;
