@@ -6,10 +6,8 @@ timezone: "Australia/Perth"
 language: "en"
 keywords: ["computer science", "blog", "personal"]
 author: "phlummox"
-author_email: "webmaster@phlummox.dev"
 #site_url: "https://phlummox.dev/"
 site_url: "https://phlummox-dev.github.io/"
-copyright: "<a rel='license' href='https://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' style='border-width:0' src='https://licensebuttons.net/l/by/4.0/80x15.png' width='80' height='15' /></a><br />licensed under a <a rel='license' href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.<br /></a>."
 accent: "#447db9"
 google_site_verification_code: "PwRmljegtbdwAY0IXp87X_n1jKLbTS6DxB5Z-WOonEU"
 

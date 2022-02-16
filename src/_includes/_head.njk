@@ -2,23 +2,5 @@
 {% include '_links.njk' %}
 {% include '_styles.njk' %}
 {% include '_scripts.njk' %}
-
-  {#- TODO: why is this here? shift into main.css #}
-  <style>
-    html body {
-        font-family: 'Raleway', sans-serif;
-        background-color: white;
-    }
-
-    :root {
-        --accent: {{siteinfo.accent}};
-        --border-width:  5px ;
-    }
-  </style>
-{% if customStyle != null %}
-  <style>
-  {{ customStyle | safe }}
-  </style>
-{% endif %}
 {#- vim: syntax=html :
 #}

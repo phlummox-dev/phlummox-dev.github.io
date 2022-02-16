@@ -11,19 +11,18 @@
           </div>
           <div class="navbar-collapse expandable-content-xs" data-expanded="false">
                 <ul class="nav navbar-nav">
-                  {% for menu_item in siteinfo.main_menu %}
-                  <li {% if page.url == menu_item.url %} aria-current="page"{% endif %}><a href="{{ menu_item.url | url }}">{{ menu_item.name }}</a>
-                  </li>
-                  {% endfor %}
+                  {%- for menu_item in siteinfo.main_menu %}
+                  <li{% if page.url == menu_item.url %} aria-current="page"{% endif %}><a href="{{ menu_item.url | url }}">{{ menu_item.name }}</a></li>
+                  {%- endfor %}
                 </ul>
                 <!-- navbar icons -->
                 <ul class="nav navbar-nav navbar-right">
-                  {% for menu_item in siteinfo.icon_menu %}
-                    <li class="navbar-icon"><a href="{{ menu_item.url | url }}" rel="external"  aria-label="{{menu_item.description}}"><i class="fa fa-{{ menu_item.name }}"></i></a></li>
-                  {% endfor %}
+                  {%- for menu_item in siteinfo.icon_menu %}
+                  <li class="navbar-icon"><a href="{{ menu_item.url | url }}" rel="external"  aria-label="{{menu_item.description}}"><i class="fa fa-{{ menu_item.name }}"></i></a></li>
+                  {%- endfor %}
                 </ul>
           </div>
       </div>
   </nav>
-{# vim: syntax=html :
+{#- vim: syntax=html :
 #}

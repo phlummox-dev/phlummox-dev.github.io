@@ -97,14 +97,17 @@ module.exports = function(eleventyConfig) {
     return JSON.stringify(value);
   });
 
-  eleventyConfig.addFilter("only_normal_tags", function(arr) {
-    return arr.filter(el => el !== 'post' && el !== 'all');
-  });
-
   eleventyConfig.addFilter("inspect", function(value) {
     console.log("typeof value is: ", typeof(value));
     console.log("stringified value is: ", JSON.stringify(value));
     console.log("raw value is: ", value);
+  });
+
+  ////
+  // utility filters and shortcodes
+
+  eleventyConfig.addFilter("only_normal_tags", function(arr) {
+    return arr.filter(el => el !== 'post' && el !== 'all');
   });
 
   eleventyConfig.addFilter("concatNotNull", function(arr) {
@@ -117,6 +120,9 @@ module.exports = function(eleventyConfig) {
     return res;
   });
 
+  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+
+  eleventyConfig.addGlobalData("currentDate", new Date());
 
   ////
   // markdown-it package and plugins

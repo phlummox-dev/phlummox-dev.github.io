@@ -26,7 +26,18 @@ Each item has class 'post-item' if you want to do custom spacing.
     </div>
     <div>
     <meta itemprop="keywords" content="{{post.data.tags | only_normal_tags | join(', ')}}" />
-    {% for keyword in (post.data.tags | only_normal_tags)  %}<a href="{{ ('/tags/' + keyword) | url }}"><kbd class="item-tag">{{ keyword }}</kbd></a> {% endfor %}
+    {%- set rendered_keywords = [] %}
+    {%- for keyword in (post.data.tags | only_normal_tags)  %}
+      {%- set the_url = ('/tags/' + keyword) | url %}
+      {%- set res = "<a href='"
+                    + the_url
+                    + "'><kbd class='item-tag'>"
+                    + keyword
+                    + "</kbd></a>"
+      %}
+      {%- set rendered_keywords = (rendered_keywords.push(res), rendered_keywords) %}
+    {%- endfor %}
+    {{ rendered_keywords | join(" ") | safe }}
     </div>
 
     <span style="word-break: break-word;">{% excerpt post %}</span>

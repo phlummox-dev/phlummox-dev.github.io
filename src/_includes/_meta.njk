@@ -5,6 +5,7 @@
   <meta name="DC.Format"      content="text/html" />
 
   <meta name="og:site_name"   content="{{siteinfo.title}}"/>
+  <meta property="og:url"     content="{{siteinfo.site_url + page.url.substring(1) }}" />
 
   <meta name="author"         content="{{ siteinfo.author if (author == null) else author }}" />
   <meta name="copyright"      content="{{ siteinfo.author if (author == null) else author }}" />
@@ -17,9 +18,15 @@
   <meta name="description"    content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
   <meta name="twitter:title"  content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
   <meta name="DC.Title"       content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
+  <meta property="og:title"   content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
   <meta name="DC.Description" content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
 
-  <meta property="og:updated_time" content="{{ date | dateIso }}" />
+  <meta name="date.created"         content="{{ page.date   | dateIso }}">
+  <meta name="date.available"       content="{{ page.date   | dateIso }}">
+  <meta name="DC.dateCopyrighted"   content="{{ page.date   | dateIso }}">
+
+  <meta name="date.modified"        content="{{ currentDate | dateIso }}">
+  <meta property="og:updated_time"  content="{{ currentDate | dateIso }}" />
 
   <meta name="google-site-verification" content="{{ siteinfo.google_site_verification_code }}" />
 

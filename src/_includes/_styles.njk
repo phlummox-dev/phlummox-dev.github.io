@@ -118,9 +118,6 @@ a:focus {
   border-width: 0 0 1px;
 }
 
-
-
-
 .navbar-brand {
   float: left;
   height: 50px;
@@ -190,7 +187,6 @@ a:focus {
   }
 }
 
-
 @media (min-width: 768px) {
   .navbar-left {
     float: left !important;
@@ -238,7 +234,6 @@ a:focus {
   color: #333333;
   background-color: transparent;
 }
-
 
 .navbar-default .navbar-toggle {
   border-color: #dddddd;
@@ -331,5 +326,24 @@ a:focus {
 }
 </style>
 <!-- end bootstrap.css -->
+<style>
+  html body {
+      font-family: 'Raleway', sans-serif;
+      background-color: white;
+  }
+
+  :root {
+      --accent: {{siteinfo.accent}};
+      --border-width:  5px ;
+  }
+</style>
+{# any custom rules a particular page specifies
+ # in front-matter
+ -#}
+{% if customStyle != null %}
+<style>
+{{ customStyle | safe }}
+</style>
+{% endif %}
 {# vim: syntax=css :
 #}

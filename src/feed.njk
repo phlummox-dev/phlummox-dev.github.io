@@ -6,7 +6,7 @@ eleventyExcludeFromCollections: true
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>{{ siteinfo.title }}</title>
   <subtitle>{{ siteinfo.subtitle }}</subtitle>
-  <rights>Copyright (c) {{siteinfo.author}}</rights>
+  <rights>Copyright (c) {% year %} {{siteinfo.author}}</rights>
   <link rel="self"  href="{{siteinfo.site_url + page.url.substring(1) }}" />
   <link href="{{ siteinfo.site_url }}"/>
   <updated>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
